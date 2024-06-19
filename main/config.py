@@ -32,6 +32,8 @@ class BaseConfig:
     # 'postgresql+psycopg2://postgres:123456@localhost/{db_name}'
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL_DEV")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    CATEGORIES_PER_PAGE = os.environ.get("CATEGORIES_PER_PAGE", 10)
+    ITEMS_PER_PAGE = os.environ.get("ITEMS_PER_PAGE", 10)
 
 
 class DevelopmentConfig(BaseConfig):

@@ -18,9 +18,9 @@ def register_error_handlers(app):
 
     @app.errorhandler(BaseError)
     def handle_error(error: BaseError):
-        from main.utils.log import ServiceLogger
+        from main.utils.log import LoggerService
 
-        logger = ServiceLogger(__name__)
+        logger = LoggerService(__name__)
 
         status_code = error.status_code
         if (
@@ -42,9 +42,9 @@ def register_error_handlers(app):
 
     @app.errorhandler(Exception)
     def handle_exception(e):
-        from main.utils.log import ServiceLogger
+        from main.utils.log import LoggerService
 
-        logger = ServiceLogger(__name__)
+        logger = LoggerService(__name__)
         logger.exception(message=str(e))
 
         return InternalServerError(error_message=str(e)).to_response()

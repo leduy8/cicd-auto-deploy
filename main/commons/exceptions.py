@@ -63,7 +63,9 @@ class BaseError(Exception):
         self.error_data = error_data
 
     def to_response(self):
-        return make_response(ErrorSchema().dump(self), self.status_code)
+        response = ErrorSchema().jsonify(self)
+
+        return make_response(response, self.status_code)
 
 
 class BadRequest(BaseError):
@@ -106,3 +108,11 @@ class InternalServerError(BaseError):
     status_code = StatusCode.INTERNAL_SERVER_ERROR
     error_message = _ErrorMessage.INTERNAL_SERVER_ERROR
     error_code = _ErrorCode.INTERNAL_SERVER_ERROR
+
+
+class MissingAuthorzationError(ValueError):
+    pass
+
+
+class InvalidAuthorizationError(ValueError):
+    pass
